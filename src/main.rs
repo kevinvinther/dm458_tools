@@ -180,7 +180,7 @@ fn convert_ieee754_to_decimal(binary: String) -> f32 {
     println!("Mantissa decimal: {}", mantissa_decimal);
 
     let f = 1_f32 + mantissa_decimal;
-    println!("f = 1 + {}/2^32 = 1 + {} = {}", isize::from_str_radix(mantissa, 2).unwrap(), mantissa_decimal, f);
+    println!("f = 1 + {}/2^23 = 1 + {} = {}", isize::from_str_radix(mantissa, 2).unwrap(), mantissa_decimal, f);
     let e = exponent_decimal - 127;
     println!("e = {} - 127 = {}", exponent_decimal, e);
     let base: f32 = -1.0;

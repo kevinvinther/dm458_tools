@@ -8,6 +8,8 @@ fn main() {
     println!("│      4. Konverter IEEE 754 til decimal                         │");
     println!("│      5. Generer binærstreng ud fra tal og længe                │");
     println!("│      6. Konverter twos complement til heltal                   │");
+    println!("│      7. Konverter heltal til twos complement                   │");
+    println!("│      8. Konverter bitstreng til decimal                        │");
     println!("│                                                                │");
     println!("│      0. Afslut programmet                                      │");
     println!("└────────────────────────────────────────────────────────────────┘");
@@ -22,21 +24,42 @@ fn main() {
         4 => convert_ieee754(),
         5 => generate_bin(),
         6 => convert_twos_comp(),
+        7 => decimal_to_twos_comp(),
+        8 => convert_bin_to_dec(),
         0 => println!("Tak for at bruge DM548 Tools!"),
         _ => println!("Ugyldigt værktøj"),
     }
     println!("Tak for at bruge DM548 Tools!");
 }
 
+fn convert_bin_to_dec() {
+    println!("Indtast bitstreng: ");
+    let mut input = String::new();
+    std::io::stdin().read_line(&mut input).expect("Kunne ikke læse input");
+    let input: &str = input.trim();
+
+    println!("{}", isize::from_str_radix(input, 2).expect("Kunne ikke parse input"));
+
+}
+
+fn decimal_to_twos_comp() {
+    println!("Indtast heltal: ");
+    let mut input = String::new();
+    std::io::stdin().read_line(&mut input).expect("Kunne ikke læse input");
+    let input: u32 = input.trim().parse().expect("Kunne ikke parse input");
+
+    println!("{:b}", input);
+}
+
 fn boothe() {
     // Read bit string length
-    println!("Enter bit string length: ");
+    println!("Enter bit string length (for each bit string, not together): ");
     let mut input = String::new();
     std::io::stdin().read_line(&mut input).unwrap();
     let bit_string_length = input.trim().parse::<usize>().unwrap();
 
     // Read two numbers
-    println!("Enter two numbers (whitespace seperated): ");
+    println!("Enter two numbers (decimal, whitespace seperated): ");
     let mut input = String::new();
     std::io::stdin().read_line(&mut input).unwrap();
     let numbers = input.trim().split_whitespace().map(|x| x.parse::<i32>().unwrap()).collect::<Vec<i32>>();
